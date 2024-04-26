@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 
 @Repository
 public interface BookingRepository extends JpaRepository<Booking, Integer> {
-    @Query(value="SELECT b FROM Booking b")
+    @Query(value="SELECT id, concert_id, ticket_amount, book_start_date, book_end_date FROM booking WHERE book_start_date < NOW() AND book_end_date > NOW();", nativeQuery = true)
     List<Booking> findAllBookings();
 
     List<Booking> findByConcertId(int concertId);
